@@ -1,0 +1,49 @@
+HA Cluster configuration.
+set port1-ip 10.154.100.33/24		FSB1
+set port2-ip 192.168.1.1/24
+set port4-ip 10.154.40.38/24
+hc-settings -sc -tM -nFSB1 -cCluster -pP@ssw0rd#$! -iport2
+hc-settings -si -iport1 -a10.154.100.35/24
+hc-settings -si -iport4 -a10.154.40.40/24
+hc-status -l
+
+================================================
+
+set port1-ip 10.154.100.34/24		FSB2
+set port2-ip 192.168.1.2/24
+set port4-ip 10.154.40.39/24
+hc-settings -sc -tP -nFSB2 -cCluster -pP@ssw0rd#$! -iport2
+hc-settings -l
+hc-worker -a -s192.168.1.1 -pP@ssw0rd#$!
+hc-status -l
+
+================================================
+
+set port1-ip 10.154.100.36/24		FSB3
+set port2-ip 192.168.1.3/24
+set port3-ip 10.154.40.36/24
+hc-settings -sc -tR -cCluster -pP@ssw0rd#$! -nWorker1 -iport2
+hc-settings -l
+hc-worker -a -s192.168.1.1 -pP@ssw0rd#$!
+hc-status -l
+
+================================================
+
+set port1-ip 10.154.100.37/24		FSB4
+set port2-ip 192.168.1.4/24
+set port3-ip 10.154.40.37/24
+hc-settings -sc -tR -cCluster -pP@ssw0rd#$! -nWorker2 -iport2
+hc-settings -l
+hc-worker -a -s192.168.1.1 -pP@ssw0rd#$!
+hc-status -l
+==========================================================================
+Custom VM Deployment
+==========================================================================
+vm-customized -cn -tftp -s10.x.x.x -ufoc -pPassword -f/WIN2K19.vdi -voWindows10_64 -vnWIN2K19 -d03484bc9-74fb-41fa-a5d3-5b80b600bbb4 -k14834BFFCB43DAA5A1AEE4BE895AF584
+
+vm-customized -cf -tftp -s10.x.x.x -ufoc -pP@ssw0rd#$! -f/meta.txt -vnWIN2K19
+
+Test URl
+
+https://www.fortiguard.com/sample-files
+
